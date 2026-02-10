@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Copyright } from "lucide-react";
 export const Footer = () => {
   return (
-    <div className="w-full flex flex-col items-center mt-20 bg-gray-200 gap-2 py-10 md:flex md:flex-row md:justify-around">
+    <div className="w-full flex flex-col items-center mt-20 bg-gray-200 gap-4 py-10 md:flex md:flex-row md:justify-around">
       <section className="flex flex-col items-center px-2 ">
         <Link href="/" className="flex items-center">
           <Image
@@ -33,6 +33,13 @@ export const Footer = () => {
         <p>New Arrivals</p>
         <p>Best Sellers</p>
         <p>Sale</p>
+      </section>
+      <section className="flex flex-col items-center px-2 text-sm gap-2">
+        <p className="font-bold">Company</p>
+        <p>About</p>
+        <p>Contact</p>
+        <p>Blog</p>
+        <p>Affliate Program</p>
       </section>
       
       
