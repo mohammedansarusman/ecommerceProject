@@ -1,5 +1,5 @@
-import { ProductsType } from "./types"
-export const products: ProductsType = [
+// import { ProductsType } from "./types"
+export const products = [
     {
     id: 1,
     name: "Adidas CoreFit T-Shirt",
