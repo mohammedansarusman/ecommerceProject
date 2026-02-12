@@ -13,11 +13,13 @@ export const Categories = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-  console.log("path name=>",pathname)
 
   const selectedCategory = searchParams.get("category");
+  
   const handleChange=(value: string)=>{
-    router.push(`${pathname}?category=${value}`)
+    const params = new URLSearchParams(searchParams)
+    params.set("category",value || "all")
+    router.push(`${pathname}?${params.toString()}`,{scroll:false})
   }
 
   const categories = [
