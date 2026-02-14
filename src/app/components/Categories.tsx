@@ -11,10 +11,11 @@ import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
 export const Categories = () => {
   const searchParams = useSearchParams();
+  console.log("Search Params:", searchParams);
   const router = useRouter();
   const pathname = usePathname();
-
   const selectedCategory = searchParams.get("category");
+  console.log("Selected Category:", selectedCategory);
   
   const handleChange=(value: string)=>{
     const params = new URLSearchParams(searchParams)

@@ -1,17 +1,37 @@
+'use client'
+
+import { ShoppingCart } from "lucide-react";
 import { ProductType } from "../../constants/types";
 import Image from "next/image";
 type ProductCardProps = {
   product: ProductType;
 };
+import { useState } from "react";
+
+type ProductFeature = {
+  sizes: string;
+  colors: string;
+}
+type ProductFeatureKey = "sizes" | "colors"
+
 
 export const ProductCard = ({ product }: ProductCardProps) => {
-  console.log("p=>", product);
+  
+  const [productType, setProductType] = useState<ProductFeature>({
+    sizes:product.sizes[0],
+    colors:product.colors[0],
+  })
+
+  const handleChange = (type: ProductFeatureKey,value: string) =>{
+    setProductType(prev=>({...prev,[type]:value}))
+  }
+
   return (
-    <div className="shadow-lg rounded-lg w-60 h-100">
+    <div className="shadow-lg rounded-lg w-60 h-120">
       {/* product Image */}
       <div className="w-full h-70 overflow-hidden">
         <Image
-          src={product.images[product.colors[0]]}
+          src={product.images[productType.colors]}
           alt="product-img"
           width={500}
           height={750}
@@ -19,22 +39,45 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         />
       </div>
       {/* product features */}
-      <div className="bg-gray-100 w-full h-30 flex flex-col pl-4">
+      <div className="bg-gray-100 w-full h-50 flex flex-col px-3">
         <h1 className="text-sm font-bold">{product.name}</h1>
         <p className=" text-sm line-clamp-2">{product.shortDescription}</p>
         {/* size and color */}
-        <div className="flex flex-row">
+        <div className="flex flex-row gap-4">
           {/* size */}
           <div className="flex flex-col">
             <span>Size</span>
-            <select>
+            <select defaultValue={productType.sizes} onChange={(event)=>handleChange("sizes", event.target.value)}>
               {product.sizes.map((size) => (
-              <option key={size} value={size}>{size}</option>
-            ))}
+                <option key={size} value={size}>
+                  {size.toUpperCase()}
+                </option>
+              ))}
             </select>
           </div>
           {/* color */}
-          <div className="flex flex-col"></div>
+          <div className="flex flex-col gap-1">
+            <span>Color</span>
+            <div className="flex items-center gap-1">
+              {product.colors.map((color) => (
+                <div
+                  key={color}
+                  className={`cursor-pointer w-4 h-4 rounded-full border-1 ${productType.colors===color ? "border-black" : "border-gray-400"}`}
+                  style={{ background: color }}
+                  onClick={()=>handleChange("colors",color)}
+                ></div>
+              ))}
+            </div>
+          </div>
+        </div>
+        {/* add to cart button */}
+        <div className="w-full flex items-center justify-between mt-5">
+          <p>{`$${product.price.toFixed(2)}`}</p>
+          <button className="flex items-center gap-2 px-2 border border-gray-200 p-1 rounded-md cursor-pointer
+           hover:bg-gray-600 hover:text-white transition-colors duration-150 ease-in-out">
+              <ShoppingCart className="w-4 h-4"/>
+              Add to cart
+          </button>
         </div>
       </div>
     </div>
