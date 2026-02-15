@@ -25,7 +25,7 @@ export default function RootLayout({ children }:{children:ReactNode}) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="mx-auto sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-6xl">
+        <div className="mx-auto sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-5xl">
           <Navbar />
           {children}
           <Footer/>
