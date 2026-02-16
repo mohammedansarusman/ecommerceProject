@@ -22,8 +22,8 @@ export const shippingFormSchema = z.object({
   email: z.email().min(1,"Email required"),
   phone: z
   .string()
-  .min(1,"Phone number must be between 7 and 10 digits")
-  .max(1,"Phone number must be between 7 and 10 digits")
+  .min(7,"Phone number must be between 7 and 10 digits")
+  .max(10,"Phone number must be between 7 and 10 digits")
   .regex(/^\d+$/,"Phone number must be numbers"),
   address: z.string().min(1,"Address required"),
   city: z.string().min(3,"City required"),
