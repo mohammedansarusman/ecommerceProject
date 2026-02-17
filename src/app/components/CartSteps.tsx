@@ -4,6 +4,10 @@ import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { CartItemsContainer } from "./CartItemsContainer";
 import { ShippingAddress } from "./ShippingAddress";
 import { PriceSummary } from "./PriceSummary";
+import { PaymentForm } from "./PaymentForm";
+import { Provider } from "react-redux";
+import appStore from "../../store/appStore";
+
 type StepProp = {
   id: number;
   title: string;
@@ -54,7 +58,7 @@ export const CartSteps = () => {
         {activeStep===1 ? 
           <CartItemsContainer/> 
         :
-          activeStep===2 && <ShippingAddress/>
+          activeStep===2 ? <ShippingAddress/> : <Provider store = {appStore}><PaymentForm/></Provider>
         }            
         
         {/* PRICE SUMMARY */}

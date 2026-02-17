@@ -27,9 +27,9 @@ export const PriceSummary = () => {
         <p>10</p>
       </div>
       {/* Continue Button */}
-      <div className="w-full flex justify-center items-center"> 
+      {/* <div className="w-full flex justify-center items-center"> 
         <button className="w-6/10 h-10 bg-sky-800 text-white rounded-md">Continue</button>
-      </div>
+      </div> */}
     </div>
   );
 };

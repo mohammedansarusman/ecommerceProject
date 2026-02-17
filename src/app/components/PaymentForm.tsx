@@ -1,20 +1,22 @@
 'use client'
 import { SubmitHandler, useForm } from "react-hook-form";
-import { ShippingFormInput, shippingFormSchema } from "../../constants/types";
+import { PaymentFormInput, PaymentFormSchema } from "../../constants/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
 
-export const ShippingAddress = () => {
+export const PaymentForm = () => {
+  const test = useSelector(store=>store.cart.test)
   const router = useRouter();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ShippingFormInput>({
-    resolver: zodResolver(shippingFormSchema),
+  } = useForm<PaymentFormInput>({
+    resolver: zodResolver(PaymentFormSchema),
   });
-  const handleShippingForm:SubmitHandler<ShippingFormInput> = (data) =>{
+  const handlePaymentForm:SubmitHandler<PaymentFormInput> = (data) =>{
     console.log("data=>",data);
     router.push("/cart/?step=3")
 
@@ -23,16 +25,16 @@ export const ShippingAddress = () => {
     <div className="w-full flex flex-col lg:w-6/10 rounded-xl shadow-xl border border-gray-100">
       {/* TITLE */}
       <header className="flex justify-start items-center pl-4 pt-4 h-10">
-        <h1>Shipping Address</h1>
+        <h1>Payment Method</h1>
       </header>
 
       <form 
-        className="w-full py-10 flex flex-col items-center gap-4 mt-7 px-4"
-        onSubmit={handleSubmit(handleShippingForm)}
+        className="w-full flex flex-col items-center gap-4 mt-7 py-10 px-4"
+        onSubmit={handleSubmit(handlePaymentForm)}
       >
         <div className="w-full flex flex-col items-start gap-2">
           <label htmlFor="name" className="w-8/10">
-            Name
+            Name on Card
           </label>
           <input
             id="name"
@@ -46,67 +48,56 @@ export const ShippingAddress = () => {
           )}
         </div>
         <div className="w-full flex flex-col items-start gap-2">
-          <label htmlFor="name" className="w-8/10">
-            Email
+          <label htmlFor="card" className="w-8/10">
+            Card Number
           </label>
           <input
-            id="email"
-            type="email"
-            placeholder="example@yahoo.com"
-            {...register("email")}
+            id="card"
+            type="string"
+            placeholder="1234 5678 9987 7676"
+            maxLength={5}
+            {...register("card")}
             className="border-b border-gray-400 w-8/10 outline-none"
           />
-          {errors.email && (
-            <p className="text-xs text-red-400 ">{errors.email.message}</p>
+          {errors.card && (
+            <p className="text-xs text-red-400 ">{errors.card.message}</p>
           )}
         </div>
         <div className="w-full flex flex-col items-start gap-2">
-          <label htmlFor="phone" className="w-8/10">
-            Phone
+          <label htmlFor="expiry" className="w-8/10">
+            Expiry Date
           </label>
           <input
-            id="phone"
+            id="expiry"
             type="text"
-            {...register("phone")}
+            {...register("expiry")}
             className="border-b border-gray-400 w-8/10 outline-none"
           />
-          {errors.phone && (
-            <p className="text-xs text-red-400 ">{errors.phone.message}</p>
+          {errors.expiry && (
+            <p className="text-xs text-red-400 ">{errors.expiry.message}</p>
           )}
         </div>
         <div className="w-full flex flex-col items-start gap-2">
-          <label htmlFor="address" className="w-8/10">
-            Address
+          <label htmlFor="cvv" className="w-8/10">
+            CVV
           </label>
           <input
-            id="address"
+            id="cvv"
             type="text"
-            {...register("address")}
+            {...register("cvv")}
             className="border-b border-gray-400 w-8/10 outline-none"
           />
-          {errors.address && (
-            <p className="text-xs text-red-400 ">{errors.address.message}</p>
+          {errors.cvv && (
+            <p className="text-xs text-red-400 ">{errors.cvv.message}</p>
           )}
         </div>
-        <div className="w-full flex flex-col items-start gap-2">
-          <label htmlFor="city" className="w-8/10">
-            City
-          </label>
-          <input
-            id="city"
-            type="text"
-            {...register("city")}
-            className="border-b border-gray-400 w-8/10 outline-none"
-          />
-          {errors.city && (
-            <p className="text-xs text-red-400 ">{errors.city.message}</p>
-          )}
-        </div>
-        {/* Continue Button */}
+        
+        {/* Checkout Button */}
         <div className="w-full flex justify-center items-center">
           <button className="w-6/10 h-10 bg-sky-800 text-white rounded-md" type="submit">
-            Continue
+            Check Out
           </button>
+          <p>{test}</p>
         </div>
       </form>
     </div>
