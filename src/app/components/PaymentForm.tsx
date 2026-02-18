@@ -3,10 +3,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { PaymentFormInput, PaymentFormSchema } from "../../constants/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
 
 export const PaymentForm = () => {
-  const test = useSelector(store=>store.cart.test)
   const router = useRouter();
 
   const {
@@ -97,7 +95,6 @@ export const PaymentForm = () => {
           <button className="w-6/10 h-10 bg-sky-800 text-white rounded-md" type="submit">
             Check Out
           </button>
-          <p>{test}</p>
         </div>
       </form>
     </div>

@@ -1,9 +1,13 @@
 import Image from "next/image";
 import { cartItems } from "../../constants/cartItems";
 import { DeleteIcon } from "lucide-react";
+import { useSelector } from "react-redux";
 
 export const CartItemsContainer = () => {
+  const productInCart  = useSelector(store=>store.cart.cartItems)
+  console.log("caart products=>",productInCart);
   console.log(cartItems);
+  
   return (
     <div className="w-full flex flex-col lg:w-6/10 rounded-xl shadow-xl border border-gray-100">
       {/* TITLE */}

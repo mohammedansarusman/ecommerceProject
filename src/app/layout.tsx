@@ -3,6 +3,7 @@ import "./globals.css";
 import { Navbar } from "./components/Navbar";
 import { ReactNode } from "react";
 import { Footer } from "./components/Footer";
+import { Providers } from "./components/Providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,9 +27,12 @@ export default function RootLayout({ children }:{children:ReactNode}) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div className="mx-auto sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-5xl">
-          <Navbar />
-          {children}
-          <Footer/>
+          <Providers>
+            <Navbar />
+            {children}
+            <Footer/>
+          </Providers>
+          
         </div>
       </body>
     </html>

@@ -5,8 +5,6 @@ import { CartItemsContainer } from "./CartItemsContainer";
 import { ShippingAddress } from "./ShippingAddress";
 import { PriceSummary } from "./PriceSummary";
 import { PaymentForm } from "./PaymentForm";
-import { Provider } from "react-redux";
-import appStore from "../../store/appStore";
 
 type StepProp = {
   id: number;
@@ -58,7 +56,7 @@ export const CartSteps = () => {
         {activeStep===1 ? 
           <CartItemsContainer/> 
         :
-          activeStep===2 ? <ShippingAddress/> : <Provider store = {appStore}><PaymentForm/></Provider>
+          activeStep===2 ? <ShippingAddress/> : <PaymentForm/>
         }            
         
         {/* PRICE SUMMARY */}
