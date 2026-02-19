@@ -2,7 +2,8 @@
 
 import { ShoppingCart } from "lucide-react";
 import { ProductType } from "../../constants/types";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../store/hooks";
 import { addItems } from "../../store/cartSlice";
 
 import Image from "next/image";
@@ -18,9 +19,8 @@ type ProductFeature = {
 type ProductFeatureKey = "sizes" | "colors";
 
 export const ProductCard = ({ product }: ProductCardProps) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const checking = useSelector((store) => store.cart.cartItems);
 
   const [productType, setProductType] = useState<ProductFeature>({
     sizes: product.sizes[0],
@@ -43,7 +43,6 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       }),
     );
     console.log("product", product);
-    console.log("checking=>", checking);
     console.log("type=", productType);
   };
 
@@ -86,7 +85,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
               {product.colors.map((color) => (
                 <div
                   key={color}
-                  className={`cursor-pointer w-4 h-4 rounded-full border-1 ${productType.colors === color ? "border-black" : "border-gray-400"}`}
+                  className={`cursor-pointer w-4 h-4 rounded-full ${productType.colors === color ? "border-black" : "border-gray-400"}`}
                   style={{ background: color }}
                   onClick={() => handleChange("colors", color)}
                 ></div>
