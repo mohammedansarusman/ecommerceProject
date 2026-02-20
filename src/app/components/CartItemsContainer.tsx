@@ -7,6 +7,7 @@ import { useAppSelector } from "../../store/hooks";
 
 
 export const CartItemsContainer = () => {
+  console.log("rendering cartItmescontainer")
   const productInCart= useAppSelector((store) => store.cart.cartItems);
   console.log("caart products=>", productInCart);
   console.log(cartItems);
@@ -21,7 +22,7 @@ export const CartItemsContainer = () => {
       <div className="w-full h-120 flex flex-col items-center gap-4 overflow-scroll mt-7 py-2 ">
         {productInCart.length > 0 &&
           productInCart.map((cart) => (
-            <div key={cart.id} className="w-9/10 h-36 flex gap-2 py-2">
+            <div key={`${cart.id+Math.random()}`} className="w-9/10 h-36 flex gap-2 py-2">
               {/* Image */}
               <div className="w-2/8">
                 <Image
